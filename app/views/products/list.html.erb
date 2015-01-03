@@ -1,0 +1,32 @@
+<div class="ui segment">
+
+  <%= form_for [@customer, @order], url: customer_orders_path(@customer, @order) do |f| %>
+    <%= f.hidden_field :customer_id, :value => @customer.id %>
+      <div class="ui divided list">
+      <% @items.each do |item| -%>
+        <%= f.fields_for :items, item do |ff| %>
+        <div class="item">
+          <div class="ui right floated small input" style="width:50px;">
+            <%= ff.number_field :amount, :id => "amount", :value => 0 %>
+            <%= ff.hidden_field :product_id, :value => item.product.id %>
+          </div>
+          <div class="ui icon right floated buttons">
+            <div class="decrement ui basic red button"><i class="minus icon"></i></div>
+            <div class="increment ui basic green button"><i class="plus icon"></i></div>
+          </div>
+          <img class="ui avatar image" src="/assets/cherry.jpg">
+          <div class="content">
+            <div class="header"><%= item.product.name %> </div>
+            <div class="description">
+              <p>¥<%= item.product.price %></p>
+              <%= item.product.desc %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      <% end %>
+      </div>
+    <%= f.submit "Create Order", {:class => "fluid ui green button"} %><br>
+  <% end %>
+
+</div>

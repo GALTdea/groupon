@@ -1,0 +1,39 @@
+<xml>
+    <ToUserName><![CDATA[<%= params[:xml][:FromUserName] %>]]></ToUserName>
+    <FromUserName><![CDATA[<%= params[:xml][:ToUserName] %>]]></FromUserName>
+    <CreateTime><%= Time.now.to_i %></CreateTime>
+    <MsgType><![CDATA[news]]></MsgType>
+    <ArticleCount>5</ArticleCount>
+    <Articles>
+      <item>
+        <Title><![CDATA[水果水果 好多水果]]></Title> 
+        <Description><![CDATA[description1]]></Description>
+        <PicUrl><![CDATA[http://54.149.150.184/assets/head.jpg]]></PicUrl>
+        <Url><![CDATA[http://54.149.150.184/announcement.html]]></Url>
+      </item>
+      <item>
+        <Title><![CDATA[团购水果列表]]></Title> 
+        <Description><![CDATA[description1]]></Description>
+        <PicUrl><![CDATA[http://54.149.150.184/assets/fruits1.jpg]]></PicUrl>
+        <Url><![CDATA[http://54.149.150.184/products?customer_id=<%= @customer.id %>]]></Url>
+      </item>
+      <item>
+        <Title><![CDATA[管理订单信息]]></Title> 
+        <Description><![CDATA[description2]]></Description>
+        <PicUrl><![CDATA[http://54.149.150.184/assets/orders2.jpg]]></PicUrl>
+        <Url><![CDATA[http://54.149.150.184/customers/<%= @customer.id %>/orders]]></Url>
+      </item>
+      <item>
+        <Title><![CDATA[个人信息管理]]></Title>
+        <Description><![CDATA[团购下单前需要补充个人信息]]></Description>
+        <PicUrl><![CDATA[http://54.149.150.184/assets/account2.jpg]]></PicUrl>
+        <Url><![CDATA[http://54.149.150.184/customers/<%= @customer.id %>]]></Url>
+      </item>
+      <item>
+        <Title><![CDATA[查看使用帮助]]></Title> 
+        <Description><![CDATA[description2]]></Description>
+        <PicUrl><![CDATA[http://54.149.150.184/assets/help1.jpg]]></PicUrl>
+        <Url><![CDATA[http://54.149.150.184/index.html]]></Url>
+      </item>
+    </Articles>
+</xml> 
