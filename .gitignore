@@ -14,10 +14,10 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-/bin
+bin
 
-/.capistrano
-/config/delply
+.capistrano
+config/deploy
 Capfile
 config/deploy.rb
 
