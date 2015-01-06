@@ -16,7 +16,7 @@
 /tmp
 /bin
 
-/capistrano
+/.capistrano
 /config/delply
 Capfile
 config/deploy.rb
