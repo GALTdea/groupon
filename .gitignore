@@ -16,6 +16,11 @@
 /tmp
 /bin
 
+/capistrano
+/config/delply
+Capfile
+config/deploy.rb
+
 READEME*
 
 
