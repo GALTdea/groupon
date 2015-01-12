@@ -1,32 +1,50 @@
-<div class="ui segment">
-
+<ul class="table-view">
   <%= form_for [@customer, @order], url: customer_orders_path(@customer, @order) do |f| %>
     <%= f.hidden_field :customer_id, :value => @customer.id %>
-      <div class="ui divided list">
-      <% @items.each do |item| -%>
-        <%= f.fields_for :items, item do |ff| %>
-        <div class="item">
-          <div class="ui right floated small input" style="width:50px;">
-            <%= ff.number_field :amount, :id => "amount", :value => 0 %>
-            <%= ff.hidden_field :product_id, :value => item.product.id %>
-          </div>
-          <div class="ui icon right floated buttons">
-            <div class="decrement ui basic red button"><i class="minus icon"></i></div>
-            <div class="increment ui basic green button"><i class="plus icon"></i></div>
-          </div>
-          <img class="ui avatar image" src="/assets/cherry.jpg">
-          <div class="content">
-            <div class="header"><%= item.product.name %> </div>
-            <div class="description">
-              <p>¥<%= item.product.price %></p>
-              <%= item.product.desc %>
-            </div>
-          </div>
+    <% @items.each do |item| -%>
+    <%= f.fields_for :items, item do |ff| %>
+    <li class="table-view-cell media">
+      <%= ff.hidden_field :product_id, :value => item.product.id %>
+      <img class="media-object pull-left" src="/assets/cherry.jpg">
+      <div class="media-body">
+        <a class="product-name">  <%= item.product.name %></a>
+        <div class="grouped pull-right">
+          <div class="btn btn-positive btn-outlined plus">+</div>
+          <div class="btn btn-negative btn-outlined minus">-</div>
         </div>
-        <% end -%>
-      <% end %>
+        <%= ff.number_field :amount, :id => "amount", :value => 0, class: "compact"%>
+        <figure>
+          <p class="price">￥<%= item.product.price %></p>
+          <figcaption class="truncate"><%= item.product.desc %></figcaption>
+        </figure>
       </div>
-    <%= f.submit "Create Order", {:class => "fluid ui green button"} %><br>
+    </li>
+    <% end -%>
+    <% end %>
+    <div class="content-padded">
+      <h5 class="">支付方式</h5>
+      <div class="segmented-control">
+        <% Order.payments.keys.each do |payment| %>
+        <a class="control-item">
+          <%= payment.to_sym %> 
+          <%= f.hidden_field :payment, :value => payment, :disabled => true %>
+        </a>
+        <% end %>
+      </div>
+    </div>
+    <div class="content-padded">
+      <h5 class="">提货方式</h5>
+      <div class="segmented-control">
+        <% Order.deliveries.keys.each do |delivery| %>
+        <a class="control-item">
+          <%= delivery.to_sym %> 
+          <%= f.hidden_field :delivery, :value => delivery, :disabled => true %>
+        </a>
+        <% end %>
+      </div>
+    </div>
+    <div class="content-padded">
+      <%= f.submit "Create Order", {:class => "btn btn-positive btn-block"} %><br>
+    </div>
   <% end %>
-
-</div>
+</ul>

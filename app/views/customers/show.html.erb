@@ -1,26 +1,23 @@
-<div class="ui segment">
-  <h4 class="ui horizontal header divider">
-    个人信息
-  </h4>
-  <table class="ui definition table">
-    <tbody>
-      <%= link_to "编 辑 信 息", edit_customer_path, :class => "fluid ui red button"  %><br/>
-      <tr>
-        <td class="one wide column">昵 称</td>
-        <td><%= @customer.nickname %></td>
-      </tr>
-      <tr>
-        <td>姓 名</td>
-        <td><%= @customer.name %></td>
-      </tr>
-      <tr>
-        <td>手 机</td>
-        <td><%= @customer.mobile %></td>
-      </tr>
-      <tr>
-        <td>Q Q</td>
-        <td><%= @customer.qq %></td>
-      </tr>
-    </tbody>
-  </table>
+
+<header class="bar bar-nav">
+  <h1 class="title">个人信息 </h1>
+</header>
+<div class="content">
+  <div class="card">
+    <ul class="table-view">
+      <li class="table-view-cell table-view-divider">昵 称</li>
+      <li class="table-view-cell"><td><%= @customer.nickname %></td></li>
+      <li class="table-view-cell table-view-divider">姓 名</li>
+      <li class="table-view-cell"><td><%= @customer.name %></td></li>
+      <li class="table-view-cell table-view-divider">手 机</li>
+      <li class="table-view-cell"><td><%= @customer.mobile%></td></li>
+      <li class="table-view-cell table-view-divider">Q Q</li>
+      <li class="table-view-cell"><td><%= @customer.qq%></td></li>
+      <li class="table-view-cell table-view-divider">区 域</li>
+      <li class="table-view-cell"><td><%= @customer.addresses[0].area %></td></li>
+      <li class="table-view-cell table-view-divider">地 址</li>
+      <li class="table-view-cell"><td><%= @customer.addresses[0].address %></td></li>
+    </ul>
+  </div>
+  <%= link_to "编 辑 信 息", edit_customer_path, :class => "btn btn-positive btn-block" %><br/>
 </div>

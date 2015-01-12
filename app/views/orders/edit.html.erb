@@ -1,0 +1,78 @@
+<header class="bar bar-nav">
+  <a class="icon icon-left-nav pull-left" href="<%= customer_orders_path(@customer) %>" data-transition="slide-out">
+  <a class="icon icon-trash pull-right" id="delete"></a>
+  <h1 class="title" style="color:#428bca">订单编号：<%= @order.code %></h1>
+</header>
+
+
+<div class="content">
+  <%= form_for [@customer, @order], :html => { :method => :delete, :class => "delete-form" },  url: customer_order_path(@customer, @order) do |f| %>
+  <% end %>
+  
+  <%= form_for [@customer, @order], url: customer_order_path(@customer, @order) do |f| %>
+  <%= f.hidden_field :customer_id, :value => @customer.id %>
+  <%= f.hidden_field :id, :value => @order.id %>
+  <ul class="table-view">
+    <li class="table-view-cell table-view-divider">订单项</li>
+    <% @order.items.each do |item| -%>
+    <%= f.fields_for :items, item do |ff| %>
+    <li class="table-view-cell media">
+      <img class="media-object pull-left" src="/assets/cherry.jpg">
+      <div class="media-body">
+        <a class="product-name">  <%= item.product.name %></a>
+        <div class="grouped pull-right">
+          <div class="btn btn-positive btn-outlined plus">+</div>
+          <div class="btn btn-negative btn-outlined minus">-</div>
+        </div>
+        <%= ff.number_field :amount, :id => "amount", class: "compact"%>
+        <figure>
+          <p class="price">￥<%= item.product.price %></p>
+          <figcaption class="truncate"><%= item.product.desc %></figcaption>
+        </figure>
+      </div>
+    </li>
+    <% end -%>
+    <% end %>
+    <div class="content-padded">
+      <h5 class="">支付方式</h5>
+      <div class="segmented-control">
+        <% Order.payments.keys.each do |payment| %>
+          <% if @order.payment == payment %>
+            <a class="control-item active">
+              <%= payment.to_sym %> 
+              <%= f.hidden_field :payment, :value => payment, :disabled => true %>
+            </a>
+          <% else %>
+            <a class="control-item">
+              <%= payment.to_sym %> 
+              <%= f.hidden_field :payment, :value => payment, :disabled => true %>
+            </a>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="content-padded">
+      <h5 class="">提货方式</h5>
+      <div class="segmented-control">
+        <% Order.deliveries.keys.each do |delivery| %>
+          <% if @order.delivery == delivery %>
+            <a class="control-item active">
+              <%= delivery.to_sym %> 
+              <%= f.hidden_field :delivery, :value => delivery, :disabled => true %>
+            </a>
+          <% else %>
+            <a class="control-item">
+              <%= delivery.to_sym %> 
+              <%= f.hidden_field :delivery, :value => delivery, :disabled => true %>
+            </a>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <br>
+    <div class="content-padded">
+    <%= f.submit "Update Order", {:class => "btn btn-positive btn-block"} %>
+    </div>
+  </ul>
+  <% end %>
+</div>

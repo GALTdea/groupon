@@ -1,6 +1,6 @@
 ActiveAdmin.register Order do
 
-  permit_params :code, :status, :total
+  permit_params :code, :status, :payment, :delivery, :total
 
   #actions :index, :show, :edit
 
@@ -16,6 +16,8 @@ ActiveAdmin.register Order do
   index do
     column("Order", :sortable => :id) {|order| link_to "##{order.code} ", admin_order_path(order) }
     column("State")                   {|order| status_tag(order.status) }
+    column("Payment")                 {|order| status_tag(order.payment) }
+    column("Delivery")                {|order| status_tag(order.delivery) }
     column("Date", :created_at)
     column("Customer", :customer, :sortable => :customer_id)
     column("Total")                   {|order| number_to_currency order.total}

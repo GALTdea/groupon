@@ -17,6 +17,16 @@ class OrdersController < ApplicationController
 
   end
 
+  def edit
+    @customer = Customer.find(params[:customer_id])
+    @order = Order.find(params[:id])
+    render 'edit'
+  end
+
+  def show
+
+  end
+
   def index
     @customer = Customer.find(params[:customer_id])
     @orders = @customer.orders
@@ -34,9 +44,18 @@ class OrdersController < ApplicationController
     end
   end
 
+  def destroy
+    @order = Order.find(params[:id])
+    if @order.destroy
+      redirect_to customer_orders_path
+    else
+      render plain: 'false'
+    end
+  end
+
   private
     def order_params
-      params.require(:order).permit(:customer_id, items_attributes: [:id, :amount, :product_id, :_destroy])
+      params.require(:order).permit(:customer_id, :payment, :delivery, items_attributes: [:id, :amount, :product_id, :_destroy])
     end
 
 end

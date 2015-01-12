@@ -5,6 +5,8 @@ class Order < ActiveRecord::Base
   has_many :products, through: :items
 
   enum status: [ :cancelled, :in_progress, :completed, :invoiced ]
+  enum payment: [ :cash, :alipay, :wexin, :bank ]
+  enum delivery: [ :carry, :delivery ]
 
   scope :in_progress, -> { where("orders.status = 1") }
   scope :completed, -> { where("orders.status = 2") }

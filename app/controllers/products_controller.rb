@@ -1,13 +1,18 @@
 class ProductsController < ApplicationController
   def index
-    @customer = Customer.find(params[:customer_id])
-    @order = @customer.orders.build
+    @customer = Customer.find_by wxid: params[:wxid]
 
-    @products = Product.available
+    if not @customer
+      redirect_to new_customer_path
+    else
+      @order = @customer.orders.build
 
-    @order.products << @products
-    @items = @order.items
+      @products = Product.available
 
-    render 'list'
+      @order.products << @products
+      @items = @order.items
+
+      render 'list'
+    end
   end
 end
