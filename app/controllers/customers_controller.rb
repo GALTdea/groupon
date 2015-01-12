@@ -7,6 +7,7 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(customer_params)
+    @customer.wxid = params[:wxid]
     if @customer.save
       redirect_to @customer
     else
