@@ -1,7 +1,18 @@
 
 <%= form_for @customer, :html => {:class => ''} do |f| %>
+  <% if @customer.errors.any? %>
+  <div id="error_explanation" class="ui error message">
+    <div class="header"><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</div>
+    <ul class="list">
+    <% @customer.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
-    <%= f.hidden_field :wxid, :value => params[:wxid] %>
+    <%= f.hidden_field :wxid, :value => params[:wxid] || @customer.wxid %>
+    <%= f.text_field :wxid, :value => params[:wxid] || @customer.wxid %>
     <%= f.text_field :nickname, placeholder: '昵 称' %><br>
     <%= f.text_field :name, placeholder: '姓 名' %><br>
     <%= f.number_field :mobile, placeholder: '手 机' %><br>
@@ -15,3 +26,6 @@
 <% end %>
 
 
+<% if false %>
+  <%= f.hidden_field :wxid, :value => params[:wxid] || @customer.wxid %>
+<% end %>
