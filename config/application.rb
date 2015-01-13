@@ -25,6 +25,9 @@ module Groupon
     config.wx_token = "SoiKEvXecW"
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    config.active_record.default_timezone = :local
+    config.time_zone = 'Beijing'
   end
 end
 
