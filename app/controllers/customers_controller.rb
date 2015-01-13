@@ -1,11 +1,20 @@
 class CustomersController < ApplicationController
 
   def new
-    @customer = Customer.new
-    @customer.addresses.build
+    if Customer.exists?(:wxid => params[:wxid])
+      render 'exists'
+    else
+      @customer = Customer.new
+      @customer.addresses.build
+    end
   end
 
   def create
+    if Customer.exists?(:wxid => params[:wxid])
+      render 'exists'
+      return
+    end
+
     @customer = Customer.new(customer_params)
     if @customer.save
       redirect_to @customer
