@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
 
     if @order.update_attributes(order_params)
-      redirect_to customer_orders_path
+      redirect_to customer_orders_path(:wxid => params[:order][:wxid])
     else
       render plain: 'false'
     end

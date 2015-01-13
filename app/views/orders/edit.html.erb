@@ -12,6 +12,7 @@
   
   <%= form_for [@customer, @order], url: customer_order_path(@customer, @order) do |f| %>
   <%= f.hidden_field :customer_id, :value => @customer.id %>
+  <%= f.hidden_field :wxid, :value => @customer.wxid %>
   <%= f.hidden_field :id, :value => @order.id %>
   <ul class="table-view">
     <% @order.items.each do |item| -%>
