@@ -5,7 +5,7 @@
 </header>
 
 
-<div class="content">
+<div class="content" id="order_content" status="<%= @order[:status] %>">
   <%= form_for [@customer, @order], :html => { :method => :delete, :class => "delete-form" }, url: customer_order_path(@customer, @order) do |f| %>
     <%= f.hidden_field :wxid, :value => @customer.wxid %>
   <% end %>
@@ -88,7 +88,7 @@
     </div>
     <br>
     <div class="content-padded">
-    <%= f.submit "Update Order", {:class => "btn btn-positive btn-block"} %>
+    <%= f.submit "更 新 订 单", {:class => "btn btn-positive btn-block"} %>
     </div>
   </ul>
   <% end %>

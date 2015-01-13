@@ -39,8 +39,9 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-
-    if @order.update_attributes(order_params)
+    if @order[:status] > 1
+      render plain: 'edit is not permitted on this order status.'
+    elsif @order.update_attributes(order_params)
       redirect_to customer_orders_path(:wxid => params[:order][:wxid])
     else
       render plain: 'false'

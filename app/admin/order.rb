@@ -3,6 +3,7 @@ ActiveAdmin.register Order do
   permit_params :code, :status, :payment, :delivery, :total
 
   #actions :index, :show, :edit
+  config.batch_actions = true
 
   filter :total
   filter :created_at
@@ -15,6 +16,7 @@ ActiveAdmin.register Order do
   scope :cancelled
 
   index do
+    selectable_column
     column("Order", :sortable => :id) {|order| link_to "##{order.code} ", admin_order_path(order) }
     column("State")                   {|order| status_tag(order.status) }
     column("Payment")                 {|order| status_tag(order.payment) }
@@ -23,6 +25,13 @@ ActiveAdmin.register Order do
     column("Customer", :customer, :sortable => :customer_id)
     column("Total")                   {|order| number_to_currency order.total}
     actions
+  end
+
+  batch_action :update, form: {
+    status:  :text
+  } do |ids, inputs|
+    Order.find(ids).each { |order| order.update(status: inputs[:status].to_i) }
+    redirect_to collection_path, notice: [ids, inputs].to_s
   end
 
   form do |f|

@@ -9,6 +9,14 @@ figure {
 figcaption {
   font-size: 12px;
 } 
+div.disabled
+{
+  pointer-events: none;
+
+  /* for "disabled" effect */
+  opacity: 0.5;
+  background: #CCC;
+}
 .truncate {
   height: 21px;
   width: 85%;

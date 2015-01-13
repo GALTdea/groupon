@@ -460,6 +460,12 @@
       $(document).find(".delete-form").submit();
       console.log("delete submited");
     });
+    var status = new Number($(document).find("#order_content").attr("status"));
+    if (status > 1) {
+      $(document).find("#order_content").addClass("disabled");
+      $(document).find("#delete").remove();
+
+    }
 
     /////////////////////// HIJACK /////////////////////////////
 
