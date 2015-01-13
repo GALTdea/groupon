@@ -1,7 +1,7 @@
 <header class="bar bar-nav">
   <a class="icon icon-left-nav pull-left" href="<%= customer_orders_path(@customer) %>" data-transition="slide-out">
   <a class="icon icon-trash pull-right" id="delete"></a>
-  <h1 class="title" style="color:#428bca">订单编号：<%= @order.code %></h1>
+  <h6 class="title" style="font-size:15px;">订单编号：<%= @order.code %></h6>
 </header>
 
 
@@ -13,7 +13,6 @@
   <%= f.hidden_field :customer_id, :value => @customer.id %>
   <%= f.hidden_field :id, :value => @order.id %>
   <ul class="table-view">
-    <li class="table-view-cell table-view-divider">订单项</li>
     <% @order.items.each do |item| -%>
     <%= f.fields_for :items, item do |ff| %>
     <li class="table-view-cell media">
