@@ -7,7 +7,8 @@
       <% @orders.each do |order| %>
       <li class="table-view-cell">
         <a class="navigate-right" href="<%= edit_customer_order_path(:customer_id => @customer.id, :id => order.id ) %>" data-transition="slide-in" style="font-size:12px;">
-          <%= order.created_at.to_formatted_s(:long_ordinal) %>, 
+          <%= order.created_at.to_formatted_s(:long_ordinal) %>,&nbsp; 
+          ￥<%= order.total %>,&nbsp;
           <% case order.status 
           when 'submitted' %><%= "已提交"%>
           <% when 'completed' %><%= "交易结束"%>
@@ -15,7 +16,6 @@
           <% when 'stock_up' %><%= "备货中"%>
           <% when 'on_the_way' %><%= "送货中"%>
           <% end %>
-          ￥<%= order.total %>
 
         </a>
       </li>
