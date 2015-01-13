@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   has_many :items, :dependent => :destroy
   has_many :products, through: :items
 
-  enum status: [ :cancelled, :in_progress, :completed, :invoiced ]
+  enum status: [ :cancelled, :submitted, :stock_up, :on_the_way, :completed ]
   enum payment: [ :cash, :alipay, :wexin, :bank ]
   enum delivery: [ :carry, :delivery ]
 

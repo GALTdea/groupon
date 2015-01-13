@@ -26,7 +26,12 @@
       <div class="segmented-control">
         <% Order.payments.keys.each do |payment| %>
         <a class="control-item">
-          <%= payment.to_sym %> 
+          <% case payment
+             when 'cash' %><%= "现 金" %>
+          <% when 'alipay' %><%= "支付宝" %>
+          <% when 'wexin' %><%= "微 信" %>
+          <% when 'bank' %><%= "网 银" %>
+          <% end %>
           <%= f.hidden_field :payment, :value => payment, :disabled => true %>
         </a>
         <% end %>
@@ -37,7 +42,10 @@
       <div class="segmented-control">
         <% Order.deliveries.keys.each do |delivery| %>
         <a class="control-item">
-          <%= delivery.to_sym %> 
+          <% case delivery
+             when 'carry' %><%= "自 提" %>
+          <% when 'delivery'%><%= "送 货" %>
+          <% end %>
           <%= f.hidden_field :delivery, :value => delivery, :disabled => true %>
         </a>
         <% end %>

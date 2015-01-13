@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
     @order.code = "%X" % DateTime.now.strftime('%Q')
 
     if @order.items.empty? or @order.save
-      redirect_to customer_orders_path
+      redirect_to customer_orders_path(:wxid => @order.customer.wxid)
     else
       render plain: 'save return false'
     end
@@ -29,9 +29,12 @@ class OrdersController < ApplicationController
 
   def index
     @customer = Customer.find(params[:customer_id])
-    @orders = @customer.orders
-
-    render 'index'
+    if @customer.wxid != params[:wxid]
+      render plain: 'incorrect wxid.'
+    else
+      @orders = @customer.orders
+      render 'index'
+    end
   end
 
   def update
@@ -45,11 +48,15 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    @customer =  Customer.find(params[:customer_id])
     @order = Order.find(params[:id])
-    if @order.destroy
-      redirect_to customer_orders_path
+
+    if params[:order][:wxid] != @customer.wxid
+      render plain: 'delete order failure, incorrect wxid!'
+    elsif @order.destroy
+      redirect_to customer_orders_path(:wxid => @order.customer.wxid)
     else
-      render plain: 'false'
+      render plain: 'delete order failure!'
     end
   end
 

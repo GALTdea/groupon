@@ -12,7 +12,6 @@
   <% end %>
 
     <%= f.hidden_field :wxid, :value => params[:wxid] || @customer.wxid %>
-    <%= f.text_field :wxid, :value => params[:wxid] || @customer.wxid %>
     <%= f.text_field :nickname, placeholder: '昵 称' %><br>
     <%= f.text_field :name, placeholder: '姓 名' %><br>
     <%= f.number_field :mobile, placeholder: '手 机' %><br>

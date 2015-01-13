@@ -1,12 +1,13 @@
 <header class="bar bar-nav">
-  <a class="icon icon-left-nav pull-left" href="<%= customer_orders_path(@customer) %>" data-transition="slide-out">
+  <a class="icon icon-left-nav pull-left" href="<%= customer_orders_path(@customer, :wxid => @customer.wxid) %>" data-transition="slide-out">
   <a class="icon icon-trash pull-right" id="delete"></a>
   <h6 class="title" style="font-size:15px;">订单编号：<%= @order.code %></h6>
 </header>
 
 
 <div class="content">
-  <%= form_for [@customer, @order], :html => { :method => :delete, :class => "delete-form" },  url: customer_order_path(@customer, @order) do |f| %>
+  <%= form_for [@customer, @order], :html => { :method => :delete, :class => "delete-form" }, url: customer_order_path(@customer, @order) do |f| %>
+    <%= f.hidden_field :wxid, :value => @customer.wxid %>
   <% end %>
   
   <%= form_for [@customer, @order], url: customer_order_path(@customer, @order) do |f| %>
@@ -38,12 +39,22 @@
         <% Order.payments.keys.each do |payment| %>
           <% if @order.payment == payment %>
             <a class="control-item active">
-              <%= payment.to_sym %> 
+              <% case payment
+                 when 'cash' %><%= "现 金" %>
+              <% when 'alipay' %><%= "支付宝" %>
+              <% when 'wexin' %><%= "微 信" %>
+              <% when 'bank' %><%= "网 银" %>
+              <% end %>
               <%= f.hidden_field :payment, :value => payment, :disabled => true %>
             </a>
           <% else %>
             <a class="control-item">
-              <%= payment.to_sym %> 
+              <% case payment
+                 when 'cash' %><%= "现 金" %>
+              <% when 'alipay' %><%= "支付宝" %>
+              <% when 'wexin' %><%= "微 信" %>
+              <% when 'bank' %><%= "网 银" %>
+              <% end %>
               <%= f.hidden_field :payment, :value => payment, :disabled => true %>
             </a>
           <% end %>
@@ -56,12 +67,18 @@
         <% Order.deliveries.keys.each do |delivery| %>
           <% if @order.delivery == delivery %>
             <a class="control-item active">
-              <%= delivery.to_sym %> 
+              <% case delivery
+                 when 'carry' %><%= "自 提" %>
+              <% when 'delivery'%><%= "送 货" %>
+              <% end %>
               <%= f.hidden_field :delivery, :value => delivery, :disabled => true %>
             </a>
           <% else %>
             <a class="control-item">
-              <%= delivery.to_sym %> 
+              <% case delivery
+                 when 'carry' %><%= "自 提" %>
+              <% when 'delivery'%><%= "送 货" %>
+              <% end %>
               <%= f.hidden_field :delivery, :value => delivery, :disabled => true %>
             </a>
           <% end %>
