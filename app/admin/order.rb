@@ -8,10 +8,11 @@ ActiveAdmin.register Order do
   filter :created_at
 
   scope :all, :default => true
-  scope :in_progress
+  scope :submitted
+  scope :stock_up
+  scope :on_the_way
   scope :completed
   scope :cancelled
-  scope :invoiced
 
   index do
     column("Order", :sortable => :id) {|order| link_to "##{order.code} ", admin_order_path(order) }

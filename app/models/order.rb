@@ -8,8 +8,8 @@ class Order < ActiveRecord::Base
   enum payment: [ :cash, :alipay, :wexin, :bank ]
   enum delivery: [ :carry, :delivery ]
 
-  scope :in_progress, -> { where("orders.status = 1") }
-  scope :completed, -> { where("orders.status = 2") }
+  scope :submitted, -> { where("orders.status = 1") }
+  scope :completed, -> { where("orders.status = 4") }
 
   before_save :charge
 
