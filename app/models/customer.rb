@@ -9,4 +9,5 @@ class Customer < ActiveRecord::Base
   validates :name, length: { in: 2..10 }, presence: true
   validates :mobile, length: { maximum:20 }, presence: true
   validates :qq, presence: true
+  validates :wxid, presence: true
 end
