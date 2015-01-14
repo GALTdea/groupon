@@ -26,7 +26,7 @@ ActiveAdmin.register Product do
 
   index do
     selectable_column
-    #id_column
+    id_column
     column("Image")                   {|product| image_tag(product.image.url(:thumb))}
     column :name
     column :desc
@@ -46,7 +46,26 @@ ActiveAdmin.register Product do
     f.actions
   end
 
-  show :name => :name
+  # show :name => :name
+
+  show do
+    attributes_table do
+      row :id
+      row :name
+      row :desc
+      row :status do
+        status_tag product.status
+      end
+      row :image do
+        image_tag product.image.url(:medium)
+      end
+    end
+        # :id =>        {|product| product.id}
+        # column("name")       {|product| product.name}
+        # column("desc")       {|product| product.desc}
+        # column("Status")     {|product| status_tag(product.status)}
+    active_admin_comments
+  end
 
   sidebar :product_stats, :only => :show do
     attributes_table_for resource do
