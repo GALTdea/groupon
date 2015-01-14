@@ -26,7 +26,8 @@ ActiveAdmin.register Product do
 
   index do
     selectable_column
-    id_column
+    #id_column
+    column("Image")                   {|product| image_tag(product.image.url(:thumb))}
     column :name
     column :desc
     column :status
@@ -38,7 +39,7 @@ ActiveAdmin.register Product do
       f.input :name
       f.input :desc
       # f.input :image
-      f.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.url(:medium))
+      f.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.url(:thumb))
       f.input :status, :as => :select, collection: Product.statuses.keys, :include_blank => false
       f.input :price
     end

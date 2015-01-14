@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229025133) do
+ActiveRecord::Schema.define(version: 20150114081331) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 20141229025133) do
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+
+  create_table "addresses", force: true do |t|
+    t.integer  "customer_id"
+    t.string   "area"
+    t.string   "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id"
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -72,6 +82,8 @@ ActiveRecord::Schema.define(version: 20141229025133) do
     t.string   "code"
     t.integer  "status",                              default: 1
     t.integer  "customer_id"
+    t.integer  "payment"
+    t.integer  "delivery"
     t.decimal  "total",       precision: 5, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -82,11 +94,14 @@ ActiveRecord::Schema.define(version: 20141229025133) do
   create_table "products", force: true do |t|
     t.string   "name"
     t.string   "desc"
-    t.string   "image"
-    t.integer  "status",                             default: 1
-    t.decimal  "price",      precision: 5, scale: 2
+    t.integer  "status",                                     default: 1
+    t.decimal  "price",              precision: 5, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
 end

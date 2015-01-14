@@ -57,7 +57,7 @@
                 <div class="decrement ui basic red button"><i class="minus icon"></i></div>
                 <div class="increment ui basic green button"><i class="plus icon"></i></div>
               </div>
-              <img class="ui avatar image" src="/assets/cherry.jpg">
+              <%= image_tag item.product.image.url(:thumb), class: "ui avatar image" %>
               <div class="content">
                 <div class="header"><%= item.product.name %> </div>
                 <div class="description">
