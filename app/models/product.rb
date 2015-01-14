@@ -6,4 +6,8 @@ class Product < ActiveRecord::Base
   scope :drafts, -> { where("products.status = 0") }
 
   enum status: [ :drafts, :available ]
+
+  has_attached_file :image, :styles => { :medium => "300x300#", :thumb => "64x64#" }
+  validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png"] }
+
 end

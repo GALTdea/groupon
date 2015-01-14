@@ -1,6 +1,6 @@
 ActiveAdmin.register Product do
 
-  permit_params :name, :desc, :status, :price
+  permit_params :name, :desc, :status, :price, :image
 
   scope :all, :default => true
 
@@ -33,11 +33,12 @@ ActiveAdmin.register Product do
     column :price
   end
 
-  form do |f|
+  form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "Edit Product" do
       f.input :name
       f.input :desc
-      f.input :image
+      # f.input :image
+      f.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.url(:medium))
       f.input :status, :as => :select, collection: Product.statuses.keys, :include_blank => false
       f.input :price
     end
