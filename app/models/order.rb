@@ -10,6 +10,7 @@ class Order < ActiveRecord::Base
 
   scope :submitted, -> { where("orders.status = 1") }
   scope :completed, -> { where("orders.status = 4") }
+  scope :forprint,  -> { where('orders.status in (1,2,3)') }
 
   before_save :charge
 
