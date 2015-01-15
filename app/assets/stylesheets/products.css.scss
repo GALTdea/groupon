@@ -7,10 +7,9 @@ figure {
 }
 
 figcaption {
-  font-size: 12px;
+  font-size: 14px;
 } 
-div.disabled
-{
+div.disabled {
   pointer-events: none;
 
   /* for "disabled" effect */
@@ -25,7 +24,7 @@ div.disabled
   text-overflow: ellipsis;
 }
 .price {
-  font-size: 10px;
+  font-size: 13px;
 }
 .product-name {
   font-size: 15px;
