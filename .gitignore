@@ -22,4 +22,4 @@ config/deploy.rb
 
 READEME*
 
-
+*.komodoproject

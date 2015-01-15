@@ -455,10 +455,9 @@
       } 
     });
     $(document).find("#delete").on("click", function(event) {
-      console.log("click delete");
-      console.log($(document).find(".delete-form"));
-      $(document).find(".delete-form").submit();
-      console.log("delete submited");
+      if (confirm('确定要删除么？')) {
+        $(document).find(".delete-form").submit();
+      }
     });
     var status = new Number($(document).find("#order_content").attr("status"));
     if (status > 1) {

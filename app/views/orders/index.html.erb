@@ -1,13 +1,70 @@
+<% :head %>
+  <style>
+
+  div.dialog {
+    background-color: #EFEFEF;
+    color: #2E2F30;
+    text-align: center;
+    font-family: arial, sans-serif;
+    margin: 0;
+    width: 95%;
+    max-width: 33em;
+    margin: 4em auto 0;
+    border-radius: 2px;
+  }
+
+  div.dialog > div {
+    border: 1px solid #CCC;
+    border-right-color: #999;
+    border-left-color: #999;
+    border-bottom-color: #BBB;
+    border-top: #B00100 solid 4px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    background-color: white;
+    padding: 7px 12% 0;
+    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  }
+
+  h1 {
+    font-size: 100%;
+    color: #730E15;
+    line-height: 1.5em;
+  }
+
+  div.dialog > p {
+    margin: 0 0 1em;
+    padding: 1em;
+    background-color: #F7F7F7;
+    border: 1px solid #CCC;
+    border-right-color: #999;
+    border-left-color: #999;
+    border-bottom-color: #999;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-top-color: #DADADA;
+    color: #666;
+    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  }
+  </style>
+<% :head %>
 <header class="bar bar-nav">
   <h1 class="title">订单信息</h1>
 </header>
 <div class="content">
+  <% if @orders.blank? %>
+    <div class="dialog">
+      <div>
+         <h1 class="icon icon-info" style="font-size: 17px;">目前还没有订单！</h1><p>请返回水果列表，选择需要购买的水果。</p>
+      </div>
+    </div>
+  <% else %>
   <div class="card">
     <ul class="table-view">
       <% @orders.each do |order| %>
       <li class="table-view-cell">
         <a class="navigate-right" href="<%= edit_customer_order_path(:customer_id => @customer.id, :id => order.id ) %>" data-transition="slide-in" style="font-size:12px;">
-          <%= order.created_at.to_formatted_s(:long_ordinal) %>,&nbsp; 
+          <%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %>,&nbsp; 
           ￥<%= order.total %>,&nbsp;
           <% case order.status 
           when 'submitted' %><%= "已提交"%>
@@ -22,60 +79,5 @@
       <% end %>
     </ul>
   </div>
+  <% end %>
 </div>
-
-<% if false %>
-<div class="ui segment">
-  <h4 class="ui horizontal header divider">
-    订单信息
-  </h4>
-  <div class="ui mini accordion">
-    <% @orders.each do |order| %>
-    <div class="title">
-      <i class="dropdown icon"></i>
-      <i class="wait icon"></i> <%= order.created_at.to_formatted_s(:long_ordinal) %> <i class="money icon"></i> <%= order.total %>
-    </div>
-
-
-    <div class="content">
-
-      <%= form_for [@customer, order], url: customer_order_path(@customer, order) do |f| %>
-        <%= f.hidden_field :customer_id, :value => @customer.id %>
-        <%= f.hidden_field :id, :value => order.id %>
-          <div class="ui divided list">
-            <h5 class="ui horizontal header">
-              No. &nbsp;<%= order.code %> &nbsp;
-            </h5>
-          <% order.items.each do |item| -%>
-            <%= f.fields_for :items, item do |ff| %>
-            <div class="item">
-              <div class="ui right floated small input" style="width:50px;">
-                <%= ff.number_field :amount, :id => "amount" %>
-                <%= ff.hidden_field :id, :value => item.id %>
-              </div>
-              <div class="ui icon right floated buttons">
-                <div class="decrement ui basic red button"><i class="minus icon"></i></div>
-                <div class="increment ui basic green button"><i class="plus icon"></i></div>
-              </div>
-              <%= image_tag item.product.image.url(:thumb), class: "ui avatar image" %>
-              <div class="content">
-                <div class="header"><%= item.product.name %> </div>
-                <div class="description">
-                  <p>¥<%= item.product.price %></p>
-                  <%= item.product.desc %>
-                </div>
-              </div>
-            </div>
-            <% end -%>
-          <% end %>
-          </div>
-        <%= f.submit "更 新 订 单", {:id => "dybtn", :class => "fluid ui red button"} %><br>
-      <% end %>
-
-    </div>
-
-
-    <% end %>
-  </div>
-</div>
-<% end %>
