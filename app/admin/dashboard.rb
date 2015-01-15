@@ -66,6 +66,18 @@ ActiveAdmin.register_page "Dashboard" do
             end
           end
         end
+        tr :class => "odd" do
+          td ""
+          td ""
+          Product.pluck(:id).each do |pid|
+            td do
+              Order.forprint.inject(0){|sum,order| sum + order.items.where(:product_id => pid).sum(:amount)}
+            end
+          end
+          td do
+            Order.forprint.sum(:total)
+          end
+        end
       end
     end
 
