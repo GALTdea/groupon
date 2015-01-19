@@ -4,21 +4,22 @@
     <% @items.each do |item| -%>
     <%= f.fields_for :items, item do |ff| %>
     <li class="table-view-cell media">
-      <%= ff.hidden_field :product_id, :value => item.product.id %>
-      <%= image_tag item.product.image.url(:thumb), class: "media-object pull-left" %>
+      <%= ff.hidden_field :product_id, :value => item.product_id %>
+      <%= image_tag item.product.image.url(:thumb), class: "media-object pull-left switch", :href => "#fruit-#{item.product_id}" %>
       <div class="media-body">
-        <a class="product-name">  <%= item.product.name %></a>
+        <a class="product-name switch" href="#fruit-<%= item.product_id %>">  <%= item.product.name %></a>
         <div class="grouped pull-right">
           <div class="btn btn-positive btn-outlined plus">+</div>
           <div class="btn btn-negative btn-outlined minus">-</div>
         </div>
         <%= ff.number_field :amount, :id => "amount", :value => 0, class: "compact"%>
-        <figure>
+        <figure href="#fruit-<%= item.product_id %>" class="switch">
           <p class="price">￥<%= item.product.price %></p>
           <figcaption class="truncate"><%= item.product.desc %></figcaption>
         </figure>
       </div>
     </li>
+
     <% end -%>
     <% end %>
     <div class="content-padded">
@@ -56,3 +57,18 @@
     </div>
   <% end %>
 </ul>
+
+<% @items.each do |item| -%>
+<div id="fruit-<%= item.product_id %>" class="modal">
+  <header class="bar bar-nav">
+    <a class="icon icon-close pull-right switch" href="#fruit-<%= item.product_id %>"></a>
+    <h1 class="title"><%= item.product.name %></h1>
+  </header>
+  <div class="content">
+        <figure>
+          <%= image_tag item.product.image.url(:medium), class: "", style: "width:100%;" %>
+        </figure>
+    <p class="content-padded desc"><%= item.product.desc %></p>
+  </div>
+</div>
+<% end %>

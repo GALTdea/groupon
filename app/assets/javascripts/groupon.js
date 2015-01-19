@@ -20,7 +20,8 @@
 
   var findModals = function (target) {
     var i;
-    var modals = document.querySelectorAll('a');
+    //var modals = document.querySelectorAll('a');
+    var modals = document.querySelectorAll('.switch');
 
     for (; target && target !== document; target = target.parentNode) {
       for (i = modals.length; i--;) {
@@ -33,13 +34,17 @@
 
   var getModal = function (event) {
     var modalToggle = findModals(event.target);
-    if (modalToggle && modalToggle.hash) {
-      return document.querySelector(modalToggle.hash);
+    // if (modalToggle && modalToggle.hash) {
+    //   return document.querySelector(modalToggle.hash);
+    // }
+    if (modalToggle && $(modalToggle).attr('href')) {
+      return document.querySelector($(modalToggle).attr('href'));
     }
   };
 
   window.addEventListener('touchend', function (event) {
     var modal = getModal(event);
+
     if (modal) {
       if (modal && modal.classList.contains('modal')) {
         modal.classList.toggle('active');
