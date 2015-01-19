@@ -8,14 +8,16 @@ class Order < ActiveRecord::Base
   enum payment: [ :cash, :alipay, :wexin, :bank ]
   enum delivery: [ :carry, :delivery ]
 
+  validates :payment, presence: true
+  validates :delivery, presence: true
+
   scope :submitted, -> { where("orders.status = 1") }
   scope :completed, -> { where("orders.status = 4") }
   scope :forprint,  -> { where('orders.status in (1,2,3)') }
 
   before_save :charge
 
-  accepts_nested_attributes_for :items, allow_destroy: true,
-    :reject_if => :reject_item
+  accepts_nested_attributes_for :items, allow_destroy: true, :reject_if => :reject_item
 
   def reject_item(attributes)
     exists = attributes['id'].present?

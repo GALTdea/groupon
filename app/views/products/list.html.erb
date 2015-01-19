@@ -25,35 +25,33 @@
     <div class="content-padded">
       <h5 class="">支付方式</h5>
       <div class="segmented-control">
-        <% Order.payments.keys.each do |payment| %>
-        <a class="control-item">
-          <% case payment
-             when 'cash' %><%= "现 金" %>
-          <% when 'alipay' %><%= "支付宝" %>
-          <% when 'wexin' %><%= "微 信" %>
-          <% when 'bank' %><%= "网 银" %>
-          <% end %>
-          <%= f.hidden_field :payment, :value => payment, :disabled => true %>
+        <a class="control-item active"> 现 金
+          <%= f.hidden_field :payment, :value => 'cash', :disabled => false %>
         </a>
-        <% end %>
+        <a class="control-item"> 支付宝
+          <%= f.hidden_field :payment, :value => 'alipay', :disabled => true %>
+        </a>
+        <a class="control-item"> 微 信
+          <%= f.hidden_field :payment, :value => 'wexin', :disabled => true %>
+        </a>
+        <a class="control-item"> 网 银
+          <%= f.hidden_field :payment, :value => 'bank', :disabled => true %>
+        </a>
       </div>
     </div>
     <div class="content-padded">
       <h5 class="">提货方式</h5>
       <div class="segmented-control">
-        <% Order.deliveries.keys.each do |delivery| %>
-        <a class="control-item">
-          <% case delivery
-             when 'carry' %><%= "自 提" %>
-          <% when 'delivery'%><%= "送 货" %>
-          <% end %>
-          <%= f.hidden_field :delivery, :value => delivery, :disabled => true %>
+        <a class="control-item active"> 自 提
+          <%= f.hidden_field :delivery, :value => 'carry', :disabled => false %>
         </a>
-        <% end %>
+        <a class="control-item"> 送 货
+          <%= f.hidden_field :delivery, :value => 'delivery', :disabled => true %>
+        </a>
       </div>
     </div>
     <div class="content-padded">
-      <%= f.submit "Create Order", {:class => "btn btn-positive btn-block"} %><br>
+      <%= f.submit "提 交 订 单", {:class => "btn btn-positive btn-block"} %><br>
     </div>
   <% end %>
 </ul>
