@@ -31,6 +31,7 @@ class CustomersController < ApplicationController
 
   def edit
     @customer = Customer.find(params[:id])
+    @customer.addresses.build if @customer.addresses.blank?
   end
 
   def update
