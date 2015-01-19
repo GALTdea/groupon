@@ -18,13 +18,31 @@
     <%= f.number_field :qq, placeholder: 'Q Q'%><br>
 
     <%= f.fields_for :addresses, @customer.addresses do |ff| %>
-      <%= ff.text_field :area, placeholder: 'area' %><br>
+      <div class="segmented-control">
+      <% Address.areas.keys.each do |area| %>
+        <% if area == @customer.addresses[0].area %>
+        <a class="control-item active">
+          <% case area
+             when 'huajing' %><%= "华景新城" %>
+          <% when 'longwei' %><%= "龙威广场" %>
+          <% end %>
+          <%= ff.hidden_field :area, placeholder: 'area', :value => area, :disabled => true %>
+        </a>
+        <% else %>
+        <a class="control-item">
+          <% case area
+             when 'huajing' %><%= "华景新城" %>
+          <% when 'longwei' %><%= "龙威广场" %>
+          <% end %>
+          <%= ff.hidden_field :area, placeholder: 'area', :value => area, :disabled => true %>
+        </a>
+        <% end %>
+      <% end %>
+      </div>
+      <br>
       <%= ff.text_field :address, placeholder: 'address' %><br>
+      <%= ff.hidden_field :id %>
     <% end -%>
     <%= f.submit "Create Customer", {:class => "btn btn-positive btn-block"} %>
 <% end %>
 
-
-<% if false %>
-  <%= f.hidden_field :wxid, :value => params[:wxid] || @customer.wxid %>
-<% end %>

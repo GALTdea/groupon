@@ -15,9 +15,11 @@
       <li class="table-view-cell table-view-divider">Q Q</li>
       <li class="table-view-cell"><td><%= @customer.qq%></td></li>
       <li class="table-view-cell table-view-divider">区 域</li>
-      <li class="table-view-cell"><td><%= @customer.addresses[0].area %></td></li>
+      <% unless @customer.addresses.blank? %>
+      <li class="table-view-cell"><td><%= @customer.addresses[0][:area] %></td></li>
       <li class="table-view-cell table-view-divider">地 址</li>
       <li class="table-view-cell"><td><%= @customer.addresses[0].address %></td></li>
+      <% end %>
     </ul>
   </div>
   <%= link_to "编 辑 信 息", edit_customer_path, :class => "btn btn-positive btn-block" %><br/>
