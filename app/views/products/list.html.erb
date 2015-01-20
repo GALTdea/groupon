@@ -51,6 +51,10 @@
       </div>
     </div>
     <div class="content-padded">
+      <h5 class="">备注信息</h5>
+      <%= f.text_area :comment %>
+    </div>
+    <div class="content-padded">
       <%= f.submit "提 交 订 单", {:class => "btn btn-positive btn-block"} %><br>
     </div>
   <% end %>
