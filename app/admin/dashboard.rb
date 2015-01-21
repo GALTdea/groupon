@@ -31,15 +31,15 @@ ActiveAdmin.register_page "Dashboard" do
     #   end
     # end
 
-    table title: "订单列表" do
+    table title: "订单列表", :class => "index_table index" do
       thead do
         tr do
           (["订单号","姓名"] + Product.pluck(:name) + ["合计", "支付方式", "提货方式"]).each &method(:th)
         end
       end
       tbody do
-        Order.forprint.each do |order|
-          tr do
+        Order.forprint.each_with_index do |order, i|
+          tr :class => (i.even? ? "odd" : "even") do
             td do
               order.code {|order| link_to "##{order.code} ", admin_order_path(order) }
             end
