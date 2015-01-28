@@ -11,6 +11,8 @@ ActiveAdmin.register Address do
     selectable_column
     id_column
     column("Customer") {|address| address.customer.name}
+    column("Nickname") {|address| address.customer.nickname}
+    column("mobile")   {|address| address.customer.mobile}
     column :area
     column :address
     column :created_at

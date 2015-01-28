@@ -15,6 +15,7 @@ ActiveAdmin.register Customer do
     id_column
     column :nickname
     column :name
+    column :mobile
     column :created_at
     actions
   end

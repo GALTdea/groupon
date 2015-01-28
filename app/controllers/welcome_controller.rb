@@ -9,11 +9,8 @@ class WelcomeController < ApplicationController
 
   def create
     @customer = Customer.find_by wxid: params[:xml]['FromUserName']
-    if @customer
-      render 'registered', formats => :xml
-    else
-      render 'unregistered', formats => :xml
-    end
+    @customer ?  (render 'unregistered', formats => :xml) :
+          (render 'registered', formats => :xml)
   end
 
   def index
