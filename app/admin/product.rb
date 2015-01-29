@@ -34,6 +34,13 @@ ActiveAdmin.register Product do
     column :price
   end
 
+  batch_action :update, form: {status: [['下架', 0], ['在售', 1]]} do |ids, inputs|
+    Product.find(ids).each { |product| product.update(status: inputs[:status].to_i) }
+    redirect_to collection_path, notice: [ids, inputs].to_s
+  end
+
+
+
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "Edit Product" do
       f.input :name

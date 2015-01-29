@@ -27,9 +27,7 @@ ActiveAdmin.register Order do
     actions
   end
 
-  batch_action :update, form: {
-    status:  :text
-  } do |ids, inputs|
+  batch_action :update, form: { status: [['已提交',1],['备货中',2],['送货中',3],['交易结束',4],['取消交易',0]]} do |ids, inputs|
     Order.find(ids).each { |order| order.update(status: inputs[:status].to_i) }
     redirect_to collection_path, notice: [ids, inputs].to_s
   end
