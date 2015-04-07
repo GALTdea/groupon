@@ -8,20 +8,20 @@
       <item>
         <Title><![CDATA[水果水果 好多水果]]></Title> 
         <Description><![CDATA[description1]]></Description>
-        <PicUrl><![CDATA[http://54.149.150.184/assets/head.jpg]]></PicUrl>
-        <Url><![CDATA[http://54.149.150.184/announcement.html]]></Url>
+        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/head.jpg]]></PicUrl>
+        <Url><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/announcement.html]]></Url>
       </item>
       <item>
         <Title><![CDATA[创建个人信息]]></Title>
         <Description><![CDATA[团购下单前需要补充个人信息]]></Description>
-        <PicUrl><![CDATA[http://54.149.150.184/assets/account2.jpg]]></PicUrl>
-        <Url><![CDATA[http://54.149.150.184/customers/new?wxid=<%= params[:xml][:FromUserName] %>]]></Url>
+        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/account2.jpg]]></PicUrl>
+        <Url><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/customers/new?wxid=<%= params[:xml][:FromUserName] %>]]></Url>
       </item>
       <item>
         <Title><![CDATA[查看使用帮助]]></Title> 
         <Description><![CDATA[description2]]></Description>
-        <PicUrl><![CDATA[http://54.149.150.184/assets/help1.jpg]]></PicUrl>
-        <Url><![CDATA[http://54.149.150.184/index.html]]></Url>
+        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/help1.jpg]]></PicUrl>
+        <Url><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/index.html]]></Url>
       </item>
     </Articles>
 </xml> 
