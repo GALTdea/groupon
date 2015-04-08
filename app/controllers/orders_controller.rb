@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     if @customer.wxid != params[:wxid]
       render plain: 'incorrect wxid.'
     else
-      @orders = @customer.orders
+      @orders = @customer.orders.order(:created_at => :desc)
       render 'index'
     end
   end
