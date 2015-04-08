@@ -24,6 +24,7 @@ ActiveAdmin.register Order do
     column("Date", :created_at)
     column("Customer", :customer, :sortable => :customer_id)
     column("Total")                   {|order| number_to_currency order.total}
+    column("Comment", :comment)
     actions
   end
 
@@ -37,6 +38,7 @@ ActiveAdmin.register Order do
       f.input :code
       f.input :total
       f.input :status, :as => :select, collection: Order.statuses.keys, :include_blank => false
+      f.input :comment
     end
     f.actions
   end
