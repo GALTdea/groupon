@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 20150120034835) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "addresses", force: true do |t|
     t.integer  "customer_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20150120034835) do
     t.datetime "updated_at"
   end
 
-  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id"
+  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20150120034835) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "customers", force: true do |t|
     t.string   "nickname"
@@ -69,14 +69,14 @@ ActiveRecord::Schema.define(version: 20150120034835) do
   create_table "items", force: true do |t|
     t.integer  "order_id"
     t.integer  "product_id"
-    t.integer  "amount",     default: 0
-    t.decimal  "price",      default: 0.0
+    t.integer  "amount",                              default: 0
+    t.decimal  "price",      precision: 10, scale: 0, default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "items", ["order_id"], name: "index_items_on_order_id"
-  add_index "items", ["product_id"], name: "index_items_on_product_id"
+  add_index "items", ["order_id"], name: "index_items_on_order_id", using: :btree
+  add_index "items", ["product_id"], name: "index_items_on_product_id", using: :btree
 
   create_table "orders", force: true do |t|
     t.string   "code"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20150120034835) do
     t.string   "comment"
   end
 
-  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
 
   create_table "products", force: true do |t|
     t.string   "name"
