@@ -14,25 +14,25 @@
       <item>
         <Title><![CDATA[团购水果列表]]></Title> 
         <Description><![CDATA[description1]]></Description>
-        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/fruits1.jpg]]></PicUrl>
+        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/fruits.jpg]]></PicUrl>
         <Url><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/products?wxid=<%= @customer.wxid %>]]></Url>
       </item>
       <item>
         <Title><![CDATA[管理订单信息]]></Title> 
         <Description><![CDATA[description2]]></Description>
-        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/orders2.jpg]]></PicUrl>
+        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/orders.jpg]]></PicUrl>
         <Url><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/customers/<%= @customer.id %>/orders?wxid=<%= params[:xml][:FromUserName] %>]]></Url>
       </item>
       <item>
         <Title><![CDATA[修改个人信息]]></Title>
         <Description><![CDATA[团购下单前需要补充个人信息]]></Description>
-        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/account2.jpg]]></PicUrl>
+        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/account.jpg]]></PicUrl>
         <Url><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/customers/<%= @customer.id %>]]></Url>
       </item>
       <item>
         <Title><![CDATA[查看使用帮助]]></Title> 
         <Description><![CDATA[description2]]></Description>
-        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/help1.jpg]]></PicUrl>
+        <PicUrl><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/assets/help.jpg]]></PicUrl>
         <Url><![CDATA[http://<%= `curl http://169.254.169.254/latest/meta-data/public-ipv4` %>/index.html]]></Url>
       </item>
     </Articles>
