@@ -44,6 +44,8 @@ gem 'actionpack-xml_parser'
 gem 'capistrano-rails', group: :development
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
 
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
