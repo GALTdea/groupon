@@ -48,3 +48,4 @@ gem 'capistrano-rbenv', github: "capistrano/rbenv"
 # gem 'debugger', group: [:development, :test]
 
 gem "paperclip", "~> 4.2"
+gem "yaml_db"

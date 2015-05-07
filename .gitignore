@@ -23,3 +23,5 @@ config/deploy.rb
 READEME*
 
 *.komodoproject
+.apdisk
+db/data.yml
